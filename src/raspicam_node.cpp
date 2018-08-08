@@ -95,6 +95,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /// Video render needs at least 2 buffers.
 #define VIDEO_OUTPUT_BUFFERS_NUM 3
 
+// Define the topic the image is published on
+//#define IMAGE_TOPIC "compressed_image"
+#define IMAGE_TOPIC "camera/image/compressed"
+
 
 /// Interval at which we check for an failure abort during capture
 
@@ -801,7 +805,7 @@ int main(int argc, char **argv){
    	c_info = c_info_man.getCameraInfo ();
 	ROS_INFO("Camera successfully calibrated");
    }
-   image_pub = n.advertise<sensor_msgs::CompressedImage>("camera/image/compressed", 1);
+   image_pub = n.advertise<sensor_msgs::CompressedImage>(IMAGE_TOPIC, 1);
    camera_info_pub = n.advertise<sensor_msgs::CameraInfo>("camera/camera_info", 1);
    ros::ServiceServer start_cam = n.advertiseService("camera/start_capture", serv_start_cap);
    ros::ServiceServer stop_cam = n.advertiseService("camera/stop_capture", serv_stop_cap);
